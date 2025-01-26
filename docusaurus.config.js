@@ -34,7 +34,7 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', `ru`],
   },
 
   presets: [
@@ -114,7 +114,7 @@ const config = {
             items: [
               {
                 label: 'Discord',
-                href: '',
+                href: 'https://github.com/DomDotDot/perfect-sandbox-mil-game',
               },
  
             ],
