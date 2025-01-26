@@ -22,7 +22,7 @@ sidebar_position: 1
             2. Occurrence : Current occurs only in a closed electrical circuit in the presence of voltage.
             3. Current strength is the amount of electric charge flowing through the cross section of a conductor per unit time.
             4. Effect of load: The strength of current in a circuit increases with the number of electrical devices (load) connected and switched on.
-            5. Calculation: The current in a circuit is calculated as the rvdivision of potential Power by voltage 
+            5. Calculation: The current in a circuit is calculated as the division of potential Power by voltage 
             :::info
             Power Formula:
             (Current = Potential Power / Voltage)
