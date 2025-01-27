@@ -454,5 +454,7 @@ sidebar_position: 3
                                             <div>Если цель не обнаружена на соответствующем канале обнаружения, значение равно 0.</div>
                                             <br/>
 
-                    </div>
-            </details>
+                                 </div>
+                        </details>
+            </div>
+        </details>
