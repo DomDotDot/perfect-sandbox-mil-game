@@ -18,10 +18,10 @@ sidebar_position: 1
 
 ---
 
-## Features
+## Characteristics
 
-    1. **Maximum Malleability:** 200
-    2. **Energy consumption per hour (kwh):** Depends on current unit size
+    1. `Maximum Malleability:` 200
+    2. `Energy consumption per hour (kwh):` Depends on current unit size
 
         :::info Formula
         `Consumption = 10 kwh * Malleability`.
@@ -34,21 +34,21 @@ sidebar_position: 1
     1. **FOV X** - Horizontal field of view (in degrees). 
 
         1. `Range:` 1-360
-        2. `Starting value:` 90
+        2. `Default value:` 90
 
     2. **FOV Y** - Vertical field of view (in degrees). 
 
-        1. `Range: 1-180.`
-        2. `Starting value:` 70
+        1. `Range:` 1-180
+        2. `Default value:` 70
 
-    3. **Total effective detection range:**.  
+    3. **Total effective detection range:** 
     
         :::info Formula.
         `RangeKM = BaseRange * (Malleability_root / Current_Malleability_root) * (Minimum_FOV / Average_FOV)`.
         ::: 
 
             ```
-                RanegKM = Range in kilometers
+                RangeKM = Range in kilometers
                 BaseRange = 1 for every malleability 
                 Malleability_root = the cube root of the Maximum Malleability (approximately 5.85 for 200).
                 Current_Malleability_root = the cube root of the block's current Malleability.
@@ -67,7 +67,7 @@ sidebar_position: 1
     4. **Sensitivity:** Radar target sensitivity level. 
 
         1. `Range:` 1-100
-        2. `Starting value:` 50
+        2. `Default value:` 50
 
             * 1-30 (Low): Detection of large objects (ships, heavy equipment). Fewer false positives from interference.
             * 31-70 (Medium): Detection of aerial targets (aeroplanes, helicopters). Balance between detection and jamming.
@@ -75,11 +75,11 @@ sidebar_position: 1
 
 ---
 
-### Component outputs and inputs
+## Component outputs and inputs
 
     ### Analogue
 
-        * **Analogue input:**  
+        * **Analogue input:**
             `On/Off`
 
                 1. [Bool]
@@ -92,7 +92,7 @@ sidebar_position: 1
 
     ### Arithmetic
 
-        * **Digital output:** 
+        * **Digital output:**
             `Current Azimuth`
 
                 1. [Num]
@@ -104,7 +104,7 @@ sidebar_position: 1
 
     ### Electrical
 
-        * **Electrical input:** 
+        * **Electrical input:**
             `Electricity`
 
                 * Required to supply power.
@@ -260,8 +260,7 @@ sidebar_position: 1
                                         <div>Inbound [31] - Outbound [15]</div>
                                         <br/>
                                         <div>Inbound [32] - Outbound [16]</div>
-
-
+                                        
                                     </div>
                             </details>
                     </div>
