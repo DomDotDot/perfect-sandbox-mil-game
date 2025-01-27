@@ -3,7 +3,7 @@ title: Searching Radar
 sidebar_position: 1
 ---
 
-## Searching Radar
+# Searching Radar
 
 ## Description
 
@@ -13,18 +13,18 @@ sidebar_position: 1
 
     **Expanded Description:**
 
-        ‘Detection Radar’ is a basic radar designed for early warning of approaching targets.  It scans a wide area and reports the presence of a target in its field of view and determines its azimuthal direction.  This radar is ideal for building early warning and general situational awareness systems. Its simplicity and low cost make it an excellent choice for the early stages of the game or for installation on the periphery of a base.
+        `Searching Radar` is a basic radar designed for early warning of approaching targets.  It scans a wide area and reports the presence of a target in its field of view and determines its azimuthal direction.  This radar is ideal for building early warning and general situational awareness systems. Its simplicity and low cost make it an excellent choice for the early stages of the game or for installation on the periphery of a base.
         It has a ‘Sensitivity’ parameter to adjust for different detection conditions.
 
 ---
 
 ## Features
 
-    1. **Maximum Traction:** 200
+    1. **Maximum Malleability:** 200
     2. **Energy consumption per hour (kwh):** Depends on current unit size
 
         :::info Formula
-        `Consumption = 10 kwh * draught rate`.
+        `Consumption = 10 kwh * Malleability`.
         :::
 
 ---
@@ -44,19 +44,19 @@ sidebar_position: 1
     3. **Total effective detection range:**.  
     
         :::info Formula.
-        `Range = BaseRange * (Tightness_root / Current_Tightness_root) * (Minimum_FOV / Average_FOV)`.
+        `Range = BaseRange * (Malleability_root / Current_Malleability_root) * (Minimum_FOV / Average_FOV)`.
         ::: 
 
             ```
                 ``BasicDistance`` for 1x1x1 size and 45x45 degree FOV = 1000 metres.
-                ``Toughness_root` = the cube root of the Maximum Toughness (approximately 5.85 for 200).
-                `Current_FOV_root` = the cube root of the block's current pull.
+                ``Malleability_root` = the cube root of the Maximum Malleability (approximately 5.85 for 200).
+                `Current_Malleability_root` = the cube root of the block's current Malleability.
                 `Minimum_FOV` = 10 degrees (minimum FOV value).
                 `Average_FOV` = the arithmetic mean between FOV X and FOV Y.
             ```
 
         :::tip Example.
-        *Calculation example:* For a 2x2x2 block (pull 8) and FOV 30x30 degrees: ``Range = 1000 * (5.85 / 2) * (10 / 30) ≈ 975 metres``.
+        *Calculation example:* For a 2x2x2 block (Malleability 8) and FOV 30x30 degrees: ``Range = 1000 * (5.85 / 2) * (10 / 30) ≈ 975 metres``.
         ::: 
         
     4. **Sensitivity:** Radar target sensitivity level. 
