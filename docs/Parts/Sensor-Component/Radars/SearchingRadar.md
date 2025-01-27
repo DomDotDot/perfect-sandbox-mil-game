@@ -33,40 +33,45 @@ sidebar_position: 1
 
     1. **FOV X** - Horizontal field of view (in degrees). 
 
-        1. `Range: 1-360.
-        2. `Starting value: 90 degrees.`.
+        1. `Range:` 1-360
+        2. `Starting value:` 90
 
     2. **FOV Y** - Vertical field of view (in degrees). 
 
-        1. `Range: 1-180.`.
-        2. `Starting value: 70 degrees.`.
+        1. `Range: 1-180.`
+        2. `Starting value:` 70
 
     3. **Total effective detection range:**.  
     
         :::info Formula.
-        `Range = BaseRange * (Malleability_root / Current_Malleability_root) * (Minimum_FOV / Average_FOV)`.
+        `RangeKM = BaseRange * (Malleability_root / Current_Malleability_root) * (Minimum_FOV / Average_FOV)`.
         ::: 
 
             ```
-                ``BasicDistance`` for 1x1x1 size and 45x45 degree FOV = 1000 metres.
-                ``Malleability_root` = the cube root of the Maximum Malleability (approximately 5.85 for 200).
-                `Current_Malleability_root` = the cube root of the block's current Malleability.
-                `Minimum_FOV` = 10 degrees (minimum FOV value).
-                `Average_FOV` = the arithmetic mean between FOV X and FOV Y.
+                RanegKM = Range in kilometers
+                BaseRange = 1 for every malleability 
+                Malleability_root = the cube root of the Maximum Malleability (approximately 5.85 for 200).
+                Current_Malleability_root = the cube root of the block's current Malleability.
+                Minimum_FOV = Minimum FOV value of any radar is 1.
+                Average_FOV = the arithmetic mean between FOV X and FOV Y.
             ```
 
         :::tip Example.
-        *Calculation example:* For a 2x2x2 block (Malleability 8) and FOV 30x30 degrees: ``Range = 1000 * (5.85 / 2) * (10 / 30) ≈ 975 metres``.
+        *Calculation example:* For a 2x2x2 block (Malleability 8) and FOV 30x30 degrees: `RangeKM = 8 * (5.85 / 2) * (1 / 30) ≈ 0.78 kilometres`.
+        ::: 
+
+        :::tip Example.
+        *Calculation example:* For a 2x2x2 block (Malleability 8) and FOV 1x1 degrees: `RangeKM = 8 * (5.85 / 2) * (1 / 1) ≈ 23.4 kilometres`.
         ::: 
         
     4. **Sensitivity:** Radar target sensitivity level. 
 
-        1. `Range: 1-100.
-        2. `Starting value: 50.`
+        1. `Range:` 1-100
+        2. `Starting value:` 50
 
-            * *1-30 (Low):* * Detection of large objects (ships, heavy equipment). Fewer false positives from interference.
-            * *31-70 (Medium):* Detection of aerial targets (aeroplanes, helicopters). Balance between detection and jamming.
-            * *71-100 (High):* Cartographic mode, detection of even small objects and terrain. High probability of false alarms from interference (birds, clouds).
+            * 1-30 (Low): Detection of large objects (ships, heavy equipment). Fewer false positives from interference.
+            * 31-70 (Medium): Detection of aerial targets (aeroplanes, helicopters). Balance between detection and jamming.
+            * 71-100 (High): Cartographic mode, detection of even small objects and terrain. High probability of false alarms from interference (birds, clouds).
 
 ---
 
@@ -75,43 +80,48 @@ sidebar_position: 1
     ### Analogue
 
         * **Analogue input:**  
-            ‘On/Off’
+            `On/Off`
 
-                1. Signal ON (RIGHT).
-                    * Radar is active
-                2. Signal OFF (False).
-                    * Radar is inactive and does not consume energy.
+                1. [Bool]
+                    * `Range:` 1
+                    * `Description:` Radar is active.
+                2. [Bool]
+                    * `Range:` 0
+                    * `Description:` Radar is inactive and does not consume energy.
 
 
     ### Arithmetic
 
-        * ** Digital output:** 
-            ‘Current Azimuth’
+        * **Digital output:** 
+            `Current Azimuth`
 
-                1. * Outputs the current azimuth of the radar face in degrees (0-360)
-                    *Updated if the radar is rotating.
+                1. [Num]
+                    * `Range:` 0-360
+                    * `Description:` Outputs the current azimuth of the radar face in degrees. Updated if the radar is rotating.
+                    
             
 
 
     ### Electrical
 
         * **Electrical input:** 
+            `Electricity`
 
-            ‘Power’
+                * Required to supply power.
 
-                * Required to supply power to operate the radar.
-
-        ** **Electrical Output:** 
-
-            ‘Energy Transit’. 
-
-                * For connection to a further electrical circuit.
 
     ### Composite
 
         * **Composite Output:**
+            `Radar Data`
 
-            **Number Of Channels:** 32 
+                * `Architecture:` 32-bit
+                * `Number Of Channels:` 32
+                * `Occupied Channels:` 32
+                * `Inbound channels:` 16
+                * `Outbound channels:` 16
+                * `Array:` [16][2]
+
 
             
             <details>
@@ -121,7 +131,7 @@ sidebar_position: 1
                     <div>
                             <details>
                                 <summary>
-                                    Target Detection [1-16] - [1-16]
+                                    Target Detection [1-16] - [nan-nan]
                                 </summary>
                                     <div>
                                         <div>Description: Each channel corresponds to a potential goal.</div> 
@@ -145,42 +155,41 @@ sidebar_position: 1
                                         
                                         <div>Received channels: nan</div>
                                         <br/>
-                                        
 
-                                        
-                                            
-
-                                        <div>Channel [1]</div>
+                                        <div>Channel list:</div>
                                         <br/>
-                                        <div>Channel [2]</div>
+      
+                                        <div>Outbound [1] - Inbound [17]</div>
                                         <br/>
-                                        <div>Channel [3]</div>
+                                        <div>Outbound [2] - Inbound [18]</div>
                                         <br/>
-                                        <div>Channel [4]</div>
+                                        <div>Outbound [3] - Inbound [19]</div>
                                         <br/>
-                                        <div>Channel [5]</div>
+                                        <div>Outbound [4] - Inbound [20]</div>
                                         <br/>
-                                        <div>Channel [6]</div>
+                                        <div>Outbound [5] - Inbound [21]</div>
                                         <br/>
-                                        <div>Channel [7]</div>
+                                        <div>Outbound [6] - Inbound [22]</div>
                                         <br/>
-                                        <div>Channel [8]</div>
+                                        <div>Outbound [7] - Inbound [23]</div>
                                         <br/>
-                                        <div>Channel [9]</div>
+                                        <div>Outbound [8] - Inbound [24]</div>
                                         <br/>
-                                        <div>Channel [10]</div>
+                                        <div>Outbound [9] - Inbound [25]</div>
                                         <br/>
-                                        <div>Channel [11]</div>
+                                        <div>Outbound [10] - Inbound [26]</div>
                                         <br/>
-                                        <div>Channel [12]</div>
+                                        <div>Outbound [11] - Inbound [27]</div>
                                         <br/>
-                                        <div>Channel [13]</div>
+                                        <div>Outbound [12] - Inbound [28]</div>
                                         <br/>
-                                        <div>Channel [14]</div>
+                                        <div>Outbound [13] - Inbound [29]</div>
                                         <br/>
-                                        <div>Channel [15]</div>
+                                        <div>Outbound [14] - Inbound [30]</div>
                                         <br/>
-                                        <div>Channel [16]</div>
+                                        <div>Outbound [15] - Inbound [31]</div>
+                                        <br/>
+                                        <div>Outbound [16] - Inbound [32]</div>
                                         <br/>
                                     
                                     </div>
@@ -217,39 +226,40 @@ sidebar_position: 1
                                         <div>Received channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</ div>
                                         <br/>
                                         
+                                        <div>Channel list:</div>
+                                        <br/>
                                             
-
-                                        <div>Channel [17]</div>
+                                        <div>Inbound [17] - Outbound [1]</div>
                                         <br/>
-                                        <div>Channel [18]</div>
+                                        <div>Inbound [18] - Outbound [2]</div>
                                         <br/>
-                                        <div>Channel [19]</div>
+                                        <div>Inbound [19] - Outbound [3]</div>
                                         <br/>
-                                        <div>Channel [20]</div>
+                                        <div>Inbound [20] - Outbound [4]</div>
                                         <br/>
-                                        <div>Channel [21]</div>
+                                        <div>Inbound [21] - Outbound [5]</div>
                                         <br/>
-                                        <div>Channel [22]</div>
+                                        <div>Inbound [22] - Outbound [6]</div>
                                         <br/>
-                                        <div>Channel [23]</div>
+                                        <div>Inbound [23] - Outbound [7]</div>
                                         <br/>
-                                        <div>Channel [24]</div>
+                                        <div>Inbound [24] - Outbound [8]</div>
                                         <br/>
-                                        <div>Channel [25]</div>
+                                        <div>Inbound [25] - Outbound [9]</div>
                                         <br/>
-                                        <div>Channel [26]</div>
+                                        <div>Inbound [26] - Outbound [10]</div>
                                         <br/>
-                                        <div>Channel [27]</div>
+                                        <div>Inbound [27] - Outbound [11]</div>
                                         <br/>
-                                        <div>Channel [28]</div>
+                                        <div>Inbound [28] - Outbound [12]</div>
                                         <br/>
-                                        <div>Channel [29]</div>
+                                        <div>Inbound [29] - Outbound [13]</div>
                                         <br/>
-                                        <div>Channel [30]</div>
+                                        <div>Inbound [30] - Outbound [14]</div>
                                         <br/>                               
-                                        <div>Channel [31]</div>
+                                        <div>Inbound [31] - Outbound [15]</div>
                                         <br/>
-                                        <div>Channel [32]</div>
+                                        <div>Inbound [32] - Outbound [16]</div>
 
 
                                     </div>
