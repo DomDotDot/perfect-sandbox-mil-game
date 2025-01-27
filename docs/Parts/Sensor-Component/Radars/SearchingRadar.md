@@ -106,3 +106,153 @@ sidebar_position: 1
             ‘Energy Transit’. 
 
                 * For connection to a further electrical circuit.
+
+    ### Composite
+
+        * **Composite Output:**
+
+            **Number Of Channels:** 32 
+
+            
+            <details>
+                <summary>
+                    Channel data
+                </summary>
+                    <div>
+                            <details>
+                                <summary>
+                                    Target Detection [1-16] - [1-16]
+                                </summary>
+                                    <div>
+                                        <div>Description: Each channel corresponds to a potential goal.</div> 
+                                        <br/>
+                                        
+
+                                        <div>Data type: Logical</div>
+                                        <br/>
+                                        
+
+                                        <div>Values:</div>
+                                        <br/>
+                                            <div>Maximum value: 1</div>
+                                            <br/>
+                                                <div>The target is detected in the radar field of view and corresponds to the target sequence number.</div> 
+                                                <br/>
+                                            <div>Minimum value: 0</div>
+                                            <br/>
+                                                <div>The target is not detected or tracked on this channel.</div>
+                                                <br/>
+                                        
+                                        <div>Received channels: nan</div>
+                                        <br/>
+                                        
+
+                                        
+                                            
+
+                                        <div>Channel [1]</div>
+                                        <br/>
+                                        <div>Channel [2]</div>
+                                        <br/>
+                                        <div>Channel [3]</div>
+                                        <br/>
+                                        <div>Channel [4]</div>
+                                        <br/>
+                                        <div>Channel [5]</div>
+                                        <br/>
+                                        <div>Channel [6]</div>
+                                        <br/>
+                                        <div>Channel [7]</div>
+                                        <br/>
+                                        <div>Channel [8]</div>
+                                        <br/>
+                                        <div>Channel [9]</div>
+                                        <br/>
+                                        <div>Channel [10]</div>
+                                        <br/>
+                                        <div>Channel [11]</div>
+                                        <br/>
+                                        <div>Channel [12]</div>
+                                        <br/>
+                                        <div>Channel [13]</div>
+                                        <br/>
+                                        <div>Channel [14]</div>
+                                        <br/>
+                                        <div>Channel [15]</div>
+                                        <br/>
+                                        <div>Channel [16]</div>
+                                        <br/>
+                                    
+                                    </div>
+ 
+                            </details>
+
+                            <details>
+                                <summary>
+                                    Azimuth Of the Target [17-32] - [1-16]
+                                </summary>
+                                    <div>
+                                        <div>Description: Each channel corresponds to the azimuth of the detected target associated with the target detection channel with the same serial number.</div>
+                                        <br/>
+                                        
+
+                                        <div>Data type: Arithmetic</div>
+                                        <br/>
+                                        
+                                        
+                                        <div>Values:</div>
+                                        <br/>
+                                        
+
+                                            <div>Maximum value: 360</div>
+                                            <br/>
+                                                <div>The azimuth of the target in degrees relative to the radar.</div>
+                                                <br/>
+                                            <div>Minimum value: 0</div>
+                                            <br/>
+                                                <div>If the target is not detected on the corresponding detection channel, the value is 0.</div>
+                                                <br/>
+
+                                        
+                                        <div>Received channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</ div>
+                                        <br/>
+                                        
+                                            
+
+                                        <div>Channel [17]</div>
+                                        <br/>
+                                        <div>Channel [18]</div>
+                                        <br/>
+                                        <div>Channel [19]</div>
+                                        <br/>
+                                        <div>Channel [20]</div>
+                                        <br/>
+                                        <div>Channel [21]</div>
+                                        <br/>
+                                        <div>Channel [22]</div>
+                                        <br/>
+                                        <div>Channel [23]</div>
+                                        <br/>
+                                        <div>Channel [24]</div>
+                                        <br/>
+                                        <div>Channel [25]</div>
+                                        <br/>
+                                        <div>Channel [26]</div>
+                                        <br/>
+                                        <div>Channel [27]</div>
+                                        <br/>
+                                        <div>Channel [28]</div>
+                                        <br/>
+                                        <div>Channel [29]</div>
+                                        <br/>
+                                        <div>Channel [30]</div>
+                                        <br/>                               
+                                        <div>Channel [31]</div>
+                                        <br/>
+                                        <div>Channel [32]</div>
+
+
+                                    </div>
+                            </details>
+                    </div>
+            </details>
