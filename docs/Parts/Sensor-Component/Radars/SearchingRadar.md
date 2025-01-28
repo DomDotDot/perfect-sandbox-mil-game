@@ -14,17 +14,17 @@ sidebar_position: 1
     **Expanded Description:**
 
         `Searching Radar` is a basic radar designed for early warning of approaching targets.  It scans a wide area and reports the presence of a target in its field of view and determines its azimuthal direction.  This radar is ideal for building early warning and general situational awareness systems. Its simplicity and low cost make it an excellent choice for the early stages of the game or for installation on the periphery of a base.
-        It has a ‘Sensitivity’ parameter to adjust for different detection conditions.
+        It has a `Sensitivity` parameter to adjust for different detection conditions.
 
 ---
 
 ## Characteristics
 
     1. `Maximum Malleability:` 200
-    2. `Energy consumption per hour (kwh):` Depends on current unit size
+    2. `Energy consumption per hour (kw/h):` Depends on current unit size
 
         :::info Formula
-        `Consumption = 10 kwh * Malleability`.
+        `Consumption = 10 kwh * Malleability`
         :::
 
 ---

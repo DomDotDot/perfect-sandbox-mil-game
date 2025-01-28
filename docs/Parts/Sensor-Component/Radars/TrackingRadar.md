@@ -1,192 +1,189 @@
----
-title: Tracking Radar
-sidebar_position: 2
----
+# Tracking Radar
 
-# Радар Слежения
+## Description
 
-## Описание
+    **Short description:**
 
-    **Короткое описание:**
+        Improved radar for accurate target tracking. Provides advanced data about each target, including distance, azimuth, and altitude.
 
-        Улучшенный радар для точного отслеживания целей. Предоставляет расширенные данные о каждой цели, включая расстояние, азимут и высоту.
+    **Expanded description:**
 
-    **Расширенное описание:**
-
-        `Радар Слежения` - это продвинутая версия радара обнаружения, предназначенная для не только обнаружения, но и детального отслеживания целей.  Он обеспечивает всю функциональность радара обнаружения, но дополнительно предоставляет информацию о расстоянии до цели, её азимуте и высоте относительно радара, а также время с момента обнаружения.  Эти расширенные данные делают `Радар Слежения` идеальным выбором для систем противовоздушной обороны (ПВО) и перехвата, позволяя более эффективно наводить оружие и координировать действия.  Обладая средней стоимостью и сбалансированными характеристиками, он представляет собой универсальное решение для защиты военных баз и объектов.
-        Имеет параметр "Чувствительность" для настройки под различные условия обнаружения.
+        `The Tracking Radar` is an advanced version of the detection radar, designed not only to detect, but also to track targets in detail.  It provides all the functionality of the detection radar, but additionally provides information about the distance to the target, its azimuth and altitude relative to the radar, as well as the time since detection.  These enhanced data make `Tracking Radar` an ideal choice for air defense and interception systems, allowing for more effective targeting and coordination of actions.  With its average cost and balanced characteristics, it is a universal solution for protecting military bases and facilities.
+        It has a `Sensitivity` parameter to adjust to different detection conditions.
 
 ---
 
-## Характеристики
+## Features
 
-    1. `Максимальная тягучесть:` 200
-    2. `Потребление энергии в час (кв/ч):`` Зависит от текущего размера блока
+    1. `Maximum Malleability:` 200
+    2. `Energy consumption per hour (kw/h):` Depends on the current block size
 
-        :::info Формула
-        `Потребление = 15 кв/ч * тягучесть`
+        :::info Formula
+        `Consumption = 15 kw/h * Malleability`
         :::
 
 ---
 
-## Параметры
+## Parameters
 
-    1. **FOV X** - Поле обзора по горизонтали (в градусах).
+    1. **FOV X** - Horizontal field of view (in degrees). 
 
-        1. `Диапазон:` 1-360
-        2. `Начальное значение:` 90 градусов
+        1. `Range:` 1-360
+        2. `Default value:` 90
 
-    2. **FOV Y** - Поле обзора по вертикали (в градусах).
+    2. **FOV Y** - Vertical field of view (in degrees). 
 
-        1. `Диапазон:` 1-180
-        2. `Начальное значение:` 70 градусов
+        1. `Range:` 1-180
+        2. `Default value:` 70
 
-    3. **Итоговая эффективная дальность обнаружения:**
+    3. **Total effective detection range:** 
+    
+        :::info Formula.
+        `RangeKM = BaseRange * (Malleability_root / Current_Malleability_root) * (Minimum_FOV / Average_FOV)`.
+        ::: 
 
-        :::info Формула
-        `RangeKM = BaseRange * (Malleability_root / Current_Malleability_root) * (Minimum_FOV / Average_FOV)`
-        :::
-                ```
-                RangeKM = дальность в километрах
-                BaseRange = 1 за каждую податливость
-                Malleability_root = кубический корень из максимальной тягучести (примерно 5,85 для 200).
-                Current_Malleability_root = кубический корень из текущей Тягучести блока.
-                Minimum_FOV = минимальное значение FOV для любого радара равно 1.
-                Average_FOV = среднее арифметическое между FOV X и FOV Y.
-                ```
-
-
-        :::tip Пример.
-        *Пример расчета:* Для блока 2x2x2 (Тягучесть 8) и FOV 30x30 градусов: `RangeKM = 8 * (5.85 / 2) * (1 / 30) ≈ 0.78 километра`.
-        :::
-
-        :::tip Пример.
-        *Пример расчета:* Для блока 2x2x2 (Тягучесть 8) и FOV 1x1 градусов: `RangeKM = 8 * (5.85 / 2) * (1 / 1) ≈ 23.4 километра`.
-        :::
+            ```
+                RangeKM = Range in kilometers
+                BaseRange = 1 for every malleability 
+                Malleability_root = the cube root of the Maximum Malleability (approximately 5.85 for 200).
+                Current_Malleability_root = the cube root of the block's current Malleability.
+                Minimum_FOV = Minimum FOV value of any radar is 1.
+                Average_FOV = the arithmetic mean between FOV X and FOV Y.
+            ```
 
 
-    4. **Чувствительность:**  Уровень чувствительности радара к целям.
+       :::tip Example.
+        *Calculation example:* For a 2x2x2 block (Malleability 8) and FOV 30x30 degrees: `RangeKM = 8 * (5.85 / 2) * (1 / 30) ≈ 0.78 kilometres`.
+        ::: 
 
-        1. `Диапазон:` 1-100
-        2. `Начальное значение:` 50
+        :::tip Example.
+        *Calculation example:* For a 2x2x2 block (Malleability 8) and FOV 1x1 degrees: `RangeKM = 8 * (5.85 / 2) * (1 / 1) ≈ 23.4 kilometres`.
+        ::: 
 
-            * 1-30 (Низкая):  Обнаружение крупных объектов (корабли, тяжелая техника). Меньше ложных срабатываний от помех.
-            * 31-70 (Средняя): Обнаружение воздушных целей (самолеты, вертолеты). Баланс между обнаружением и помехами.
-            * 71-100 (Высокая):  Картографический режим, обнаружение даже мелких объектов и рельефа местности. Высокая вероятность ложных срабатываний от помех (птицы, облака).
+    4. **Sensitivity:** The level of sensitivity of the radar to targets.
+
+        1. `Range:` 1-100
+        2. `Default value:` 50
+
+            * 1-30 (Low): Detection of large objects (ships, heavy machinery). Fewer false alarms from interference.
+            * 31-70 (Medium): Detection of aerial targets (airplanes, helicopters). A balance between detection and interference.
+            * 71-100 (High):  Cartographic mode, detection of even small objects and terrain. There is a high probability of false alarms from interference (birds, clouds).
 
 ---
 
-## Выходы и входы компонента
+# Component outputs and inputs
 
-    ### Аналоговые
+    ### Analogue
 
-        * **Аналоговый вход:**
-            `Включение/Выключение`
+        * **Analogue input:**
+            `On/Off`
 
                 1. [Bool]
-                    * ``Диапазон:`` 1
-                    * ``Описание:`` Радар активен.
+                    * `Range:` 1
+                    * `Description:` Radar is active.
                 2. [Bool]
-                    * ``Диапазон:`` 0
-                    * ``Описание:``Радар неактивен и не потребляет энергию.
+                    * `Range:` 0
+                    * `Description:` Radar is inactive and does not consume energy.
 
 
-    ### Арифметические
+    ### Arithmetic
 
-        * **Цифровой выход:**
-            `Текущий азимут`
+        * **Digital output:**
+            `Current Azimuth`
 
                 1. [Num]
-                    * ``Диапазон:`` 0-360
-                    * ``Описание:`` Выводит текущий азимут лица радара в градусах. Обновляется, если радар вращается.
+                    * `Range:` 0-360
+                    * `Description:` Outputs the current azimuth of the radar face in degrees. Updated if the radar is rotating.
+                    
+            
 
 
+    ### Electrical
 
-    ### Электрические
+        * **Electrical input:**
+            `Electricity`
 
-        * **Электрический вход:**
-            ``Электричество``
-
-                * Требуется для подачи электроэнергии.
+                * Required to supply power.
 
 
-    ### Составные
+    ### Composite
 
-        * **Составной выход:**
-            `Радарные данные`
+        * **Composite output:**
+        `Radar data`
 
-                * `Архитектура:` 128-битная
-                * `Количество каналов:` 128
-                * `Занятые каналы:` 80
-                * `Входящие каналы:` 32
-                * `Выходящие каналы:` 32
-                * `Массив:` [16][4]
+                * `Architecture:` 128-bit
+                * `Number of Channels:` 128
+                * `Occupied Channels:` 80
+                * `Inbound channels:` 16
+                * `Outbound channels:` 64
+                * `Array:` [16][5]
+
             <details>
                 <summary>
-                    Данные по каналам
+                    Channel data
                 </summary>
                     <div>
                             <details>
                                 <summary>
-                                    Обнаружение Цели [1-16] - [nan-nan]
+                                    Target Detection [1-16] - [nan-nan]
                                 </summary>
                                     <div>
-                                        <div>Описание: Каждый канал соответствует потенциальной цели.</div>
+                                        <div>Description: Each channel corresponds to a potential goal.</div>
                                         <br/>
 
 
-                                        <div>Тип данных: Логический</div>
+                                        <div>Data type: Logical</div>
                                         <br/>
 
 
-                                        <div>Значения:</div>
+                                        <div>Values:</div>
                                         <br/>
-                                            <div>Максимальное значение: 1</div>
+                                            <div>Maximum value: 1</div>
                                             <br/>
-                                                <div>Цель обнаружена в поле зрения радара и соответствует порядковому номеру цели.</div>
+                                                <div>The target is detected in the radar field of view and corresponds to the target sequence number.</div>
                                                 <br/>
-                                            <div>Минимальное значение: 0</div>
+                                            <div>Minimum value: 0</div>
                                             <br/>
-                                                <div>Цель не обнаружена или не отслеживается на данном канале.</div>
+                                                <div>The target is not detected or tracked on this channel.</div>
                                                 <br/>
 
-                                        <div>Принимаемые каналы: nan</div>
+                                        <div>Received channels: nan</div>
                                         <br/>
 
-                                        <div>Лист каналов:</div>
+                                        <div>Channel list:</div>
                                         <br/>
 
-                                            <div>Исходящий [1] - Входящий [17],[33],[49]</div>
+                                            <div>Outgoing [1] - Incoming [17],[33],[49]</ div>
                                             <br/>
-                                            <div>Исходящий [2] - Входящий [18],[34],[60]</div>
+                                            <div>Outgoing [2] - Incoming [18],[34],[60]</ div>
                                             <br/>
-                                            <div>Исходящий [3] - Входящий [19],[35],[51]</div>
+                                            <div>Outgoing [3] - Incoming [19],[35],[51]</ div>
                                             <br/>
-                                            <div>Исходящий [4] - Входящий [20],[36],[52]</div>
+                                            <div>Outgoing [4] - Incoming [20],[36],[52]</ div>
                                             <br/>
-                                            <div>Исходящий [5] - Входящий [21],[37],[53]</div>
+                                            <div>Outgoing [5] - Incoming [21],[37],[53]</ div>
                                             <br/>
-                                            <div>Исходящий [6] - Входящий [22],[38],[54]</div>
+                                            <div>Outgoing [6] - Incoming [22],[38],[54]</ div>
                                             <br/>
-                                            <div>Исходящий [7] - Входящий [23],[39],[55]</div>
+                                            <div>Outgoing [7] - Incoming [23],[39],[55]</ div>
                                             <br/>
-                                            <div>Исходящий [8] - Входящий [24],[40],[56]</div>
+                                            <div>Outgoing [8] - Incoming [24],[40],[56]</ div>
                                             <br/>
-                                            <div>Исходящий [9] - Входящий [25],[41],[57]</div>
+                                            <div>Outgoing [9] - Incoming [25],[41],[57]</ div>
                                             <br/>
-                                            <div>Исходящий [10] - Входящий [26],[42],[58]</div>
+                                            <div>Outgoing [10] - Incoming [26],[42],[58]</ div>
                                             <br/>
-                                            <div>Исходящий [11] - Входящий [27],[43],[59]</div>
+                                            <div>Outgoing [11] - Incoming [27],[43],[59]</ div>
                                             <br/>
-                                            <div>Исходящий [12] - Входящий [28],[44],[60]</div>
+                                            <div>Outgoing [12] - Incoming [28],[44],[60]</ div>
                                             <br/>
-                                            <div>Исходящий [13] - Входящий [29],[45],[61]</div>
+                                            <div>Outgoing [13] - Incoming [29],[45],[61]</ div>
                                             <br/>
-                                            <div>Исходящий [14] - Входящий [30],[46],[62]</div>
+                                            <div>Outgoing [14] - Incoming [30],[46],[62]</ div>
                                             <br/>
-                                            <div>Исходящий [15] - Входящий [31],[47],[63]</div>
+                                            <div>Outgoing [15] - Incoming [31],[47],[63]</ div>
                                             <br/>
-                                            <div>Исходящий [16] - Входящий [32],[48],[64]</div>
+                                            <div>Outgoing [16] - Incoming [32],[48],[64]</ div>
                                             <br/>
 
                                     </div>
@@ -195,68 +192,135 @@ sidebar_position: 2
 
                             <details>
                                 <summary>
-                                    Расстояние до Цели [17-32] - [1-16]
+                                    Distance to the Target [17-32] - [1-16]
                                 </summary>
                                     <div>
-                                        <div>Описание: Каждый канал соответствует расстоянию до обнаруженной цели, связанной с каналом обнаружения цели с таким же порядковым номером.</div>
+                                        <div>Description: Each channel corresponds to the distance to the detected target associated with the target detection channel with the same sequence number.</div>
                                         <br/>
 
 
-                                        <div>Тип данных: Арифметический</div>
+                                        <div>Data type: Arithmetic</div>
                                         <br/>
 
 
-                                        <div>Значения:</div>
+                                        <div>Values:</div>
                                         <br/>
 
 
-                                            <div>Максимальное значение: Зависит от дальности радара</div>
+                                            <div>Maximum value: Depends on the radar range</div>
                                             <br/>
-                                                <div>Расстояние до цели в метрах.</div>
+                                                <div>The distance to the target in meters.</div>
                                                 <br/>
-                                            <div>Минимальное значение: 0</div>
+                                            <div>Minimum value: 0</div>
                                             <br/>
-                                                <div>Если цель не обнаружена на соответствующем канале обнаружения, значение равно 0.</div>
+                                                <div>If the target is not detected on the corresponding detection channel, the value is 0.</div>
                                                 <br/>
 
 
-                                        <div>Принимаемые каналы: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</div>
+                                        <div>Received channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</ div>
                                         <br/>
 
-                                        <div>Лист каналов:</div>
+                                        <div>Channel list:</div>
                                         <br/>
 
-                                            <div>Входящий [17] - Исходящий [1]</div>
+                                            <div>Incoming [17] - Outgoing [1]</div>
                                             <br/>
-                                            <div>Входящий [18] - Исходящий [2]</div>
+                                            <div>Incoming [18] - Outgoing [2]</div>
                                             <br/>
-                                            <div>Входящий [19] - Исходящий [3]</div>
+                                            <div>Incoming [19] - Outgoing [3]</div>
                                             <br/>
-                                            <div>Входящий [20] - Исходящий [4]</div>
+                                            <div>Incoming [20] - Outgoing [4]</div>
                                             <br/>
-                                            <div>Входящий [21] - Исходящий [5]</div>
+                                            <div>Incoming [21] - Outgoing [5]</div>
                                             <br/>
-                                            <div>Входящий [22] - Исходящий [6]</div>
+                                            <div>Incoming [22] - Outgoing [6]</div>
                                             <br/>
-                                            <div>Входящий [23] - Исходящий [7]</div>
+                                            <div>Incoming [23] - Outgoing [7]</div>
                                             <br/>
-                                            <div>Входящий [24] - Исходящий [8]</div>
+                                            <div>Incoming [24] - Outgoing [8]</div>
                                             <br/>
-                                            <div>Входящий [25] - Исходящий [9]</div>
+                                            <div>Incoming [25] - Outgoing [9]</div>
                                             <br/>
-                                            <div>Входящий [26] - Исходящий [10]</div>
+                                            <div>Incoming [26] - Outgoing [10]</div>
                                             <br/>
-                                            <div>Входящий [27] - Исходящий [11]</div>
+                                            <div>Incoming [27] - Outgoing [11]</div>
                                             <br/>
-                                            <div>Входящий [28] - Исходящий [12]</div>
+                                            <div>Incoming [28] - Outgoing [12]</div>
                                             <br/>
-                                            <div>Входящий [29] - Исходящий [13]</div>
+                                            <div>Incoming [29] - Outgoing [13]</div>
                                             <br/>
-                                            <div>Входящий [30] - Исходящий [14]</div>
+                                            <div>Incoming [30] - Outgoing [14]</div>
                                             <br/>
-                                            <div>Входящий [31] - Исходящий [15]</div>
+                                            <div>Incoming [31] - Outgoing [15]</div>
                                             <br/>
-                                            <div>Входящий [32] - Исходящий [16]</div>
+                                            <div>Incoming [32] - Outgoing [16]</div>
+                                            <br/>
+
+                                    </div>
+                                    <details>
+                                <summary>
+                                    Azimuth Of the Target [33-48] - [1-16]
+                                </summary>
+                                    <div>
+                                        <div>Description: Each channel corresponds to the azimuth of the detected target associated with the target detection channel with the same serial number.</div>
+                                        <br/>
+
+
+                                        <div>Data type: Arithmetic</div>
+                                        <br/>
+
+
+                                        <div>Values:</div>
+                                        <br/>
+
+
+                                            <div>Maximum value: 360</div>
+                                            <br/>
+                                                <div>The azimuth of the target in degrees relative to the radar.</div>
+                                                <br/>
+                                            <div>Minimum value: 0</div>
+                                            <br/>
+                                                <div>If the target is not detected on the corresponding detection channel, the value is 0.</div>
+                                                <br/>
+
+
+                                        <div>Received channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</ div>
+                                        <br/>
+
+                                        <div>Channel list:</div>
+                                        <br/>
+
+                                            <div>Incoming [33] - Outgoing [1]</div>
+                                            <br/>
+                                            <div>Incoming [34] - Outgoing [2]</div>
+                                            <br/>
+                                            <div>Incoming [35] - Outgoing [3]</div>
+                                            <br/>
+                                            <div>Incoming [36] - Outgoing [4]</div>
+                                            <br/>
+                                            <div>Incoming [37] - Outgoing [5]</div>
+                                            <br/>
+                                            <div>Incoming [38] - Outgoing [6]</div>
+                                            <br/>
+                                            <div>Incoming [39] - Outgoing [7]</div>
+                                            <br/>
+                                            <div>Incoming [40] - Outgoing [8]</div>
+                                            <br/>
+                                            <div>Incoming [41] - Outgoing [9]</div>
+                                            <br/>
+                                            <div>Incoming [42] - Outgoing [10]</div>
+                                            <br/>
+                                            <div>Incoming [43] - Outgoing [11]</div>
+                                            <br/>
+                                            <div>Incoming [44] - Outgoing [12]</div>
+                                            <br/>
+                                            <div>Incoming [45] - Outgoing [13]</div>
+                                            <br/>
+                                            <div>Incoming [46] - Outgoing [14]</div>
+                                            <br/>
+                                            <div>Incoming [47] - Outgoing [15]</div>
+                                            <br/>
+                                            <div>Incoming [48] - Outgoing [16]</div>
                                             <br/>
 
                                     </div>
@@ -264,141 +328,141 @@ sidebar_position: 2
 
                             <details>
                                 <summary>
-                                    Азимут Цели [33-48] - [1-16]
+                                    Target Height [49-64] - [1-16]
                                 </summary>
                                     <div>
-                                        <div>Описание: Каждый канал соответствует азимуту обнаруженной цели, связанной с каналом обнаружения цели с таким же порядковым номером.</div>
+                                        <div>Description: Each channel corresponds to the height of the detected target associated with the target detection channel with the same sequence number.</div>
                                         <br/>
 
 
-                                        <div>Тип данных: Арифметический</div>
+                                        <div>Data type: Arithmetic</div>
                                         <br/>
 
 
-                                        <div>Значения:</div>
+                                        <div>Values:</div>
                                         <br/>
 
 
-                                            <div>Максимальное значение: 360</div>
+                                            <div>Maximum value: Depends on the height of the map</div>
                                             <br/>
-                                                <div>Азимут цели в градусах относительно радара.</div>
+                                                <div>The height of the target in meters relative to the radar level.</div>
                                                 <br/>
-                                            <div>Минимальное значение: 0</div>
+                                            <div>Minimum value: Depends on the depth of the map (may be negative)</div>
                                             <br/>
-                                                <div>Если цель не обнаружена на соответствующем канале обнаружения, значение равно 0.</div>
+                                                <div>If the target is not detected on the corresponding detection channel, the value is 0.</div>
                                                 <br/>
 
 
-                                        <div>Принимаемые каналы: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</div>
+                                        <div>Received channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</ div>
                                         <br/>
 
-                                        <div>Лист каналов:</div>
+                                        <div>Channel list:</div>
                                         <br/>
 
-                                            <div>Входящий [33] - Исходящий [1]</div>
+                                            <div>Incoming [49] - Outgoing [1]</div>
                                             <br/>
-                                            <div>Входящий [34] - Исходящий [2]</div>
+                                            <div>Incoming [50] - Outgoing [2]</div>
                                             <br/>
-                                            <div>Входящий [35] - Исходящий [3]</div>
+                                            <div>Incoming [51] - Outgoing [3]</div>
                                             <br/>
-                                            <div>Входящий [36] - Исходящий [4]</div>
+                                            <div>Incoming [52] - Outgoing [4]</div>
                                             <br/>
-                                            <div>Входящий [37] - Исходящий [5]</div>
+                                            <div>Incoming [53] - Outgoing [5]</div>
                                             <br/>
-                                            <div>Входящий [38] - Исходящий [6]</div>
+                                            <div>Incoming [54] - Outgoing [6]</div>
                                             <br/>
-                                            <div>Входящий [39] - Исходящий [7]</div>
+                                            <div>Incoming [55] - Outgoing [7]</div>
                                             <br/>
-                                            <div>Входящий [40] - Исходящий [8]</div>
+                                            <div>Incoming [56] - Outgoing [8]</div>
                                             <br/>
-                                            <div>Входящий [41] - Исходящий [9]</div>
+                                            <div>Incoming [57] - Outgoing [9]</div>
                                             <br/>
-                                            <div>Входящий [42] - Исходящий [10]</div>
+                                            <div>Incoming [58] - Outgoing [10]</div>
                                             <br/>
-                                            <div>Входящий [43] - Исходящий [11]</div>
+                                            <div>Incoming [59] - Outgoing [11]</div>
                                             <br/>
-                                            <div>Входящий [44] - Исходящий [12]</div>
+                                            <div>Incoming [60] - Outgoing [12]</div>
                                             <br/>
-                                            <div>Входящий [45] - Исходящий [13]</div>
+                                            <div>Incoming [61] - Outgoing [13]</div>
                                             <br/>
-                                            <div>Входящий [46] - Исходящий [14]</div>
+                                            <div>Incoming [62] - Outgoing [14]</div>
                                             <br/>
-                                            <div>Входящий [47] - Исходящий [15]</div>
+                                            <div>Incoming [63] - Outgoing [15]</div>
                                             <br/>
-                                            <div>Входящий [48] - Исходящий [16]</div>
+                                            <div>Incoming [64] - Outgoing [16]</div>
                                             <br/>
 
                                     </div>
                             </details>
-
                             <details>
                                 <summary>
-                                    Высота Цели [49-64] - [1-16]
+                                    Time since Detection[65-80] - [1-16]
                                 </summary>
                                     <div>
-                                        <div>Описание: Каждый канал соответствует высоте обнаруженной цели, связанной с каналом обнаружения цели с таким же порядковым номером.</div>
+                                        <div>Description: Each channel corresponds to the time after the target is detected, which is associated with a target detection channel with the same sequence number.</div>
                                         <br/>
 
 
-                                        <div>Тип данных: Арифметический</div>
+                                        <div>Data type: Arithmetic</div>
                                         <br/>
 
 
-                                        <div>Значения:</div>
+                                        <div>Values:</div>
                                         <br/>
 
 
-                                            <div>Максимальное значение: Зависит от высоты карты</div>
+                                            <div>Maximum value: 60 </div>
                                             <br/>
-                                                <div>Высота цели в метрах относительно уровня радара.</div>
+                                                <div>The maximum time to memorize a goal in seconds. It is reset if the target has been detected again on the corresponding detection channel</div>
                                                 <br/>
-                                            <div>Минимальное значение: Зависит от глубины карты (может быть отрицательным)</div>
+                                            <div>Minimum value: 0</div>
                                             <br/>
-                                                <div>Если цель не обнаружена на соответствующем канале обнаружения, значение равно 0.</div>
+                                                <div>If the target is not detected on the corresponding detection channel, the value is 0.</div>
                                                 <br/>
 
 
-                                        <div>Принимаемые каналы: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</div>
+                                        <div>Received channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16</ div>
                                         <br/>
 
-                                        <div>Лист каналов:</div>
+                                        <div>Channel list:</div>
                                         <br/>
 
-                                            <div>Входящий [49] - Исходящий [1]</div>
+                                            <div>Incoming [65] - Outgoing [1]</div>
                                             <br/>
-                                            <div>Входящий [50] - Исходящий [2]</div>
+                                            <div>Incoming [66] - Outgoing [2]</div>
                                             <br/>
-                                            <div>Входящий [51] - Исходящий [3]</div>
+                                            <div>Incoming [67] - Outgoing [3]</div>
                                             <br/>
-                                            <div>Входящий [52] - Исходящий [4]</div>
+                                            <div>Incoming [68] - Outgoing [4]</div>
                                             <br/>
-                                            <div>Входящий [53] - Исходящий [5]</div>
+                                            <div>Incoming [69] - Outgoing [5]</div>
                                             <br/>
-                                            <div>Входящий [54] - Исходящий [6]</div>
+                                            <div>Incoming [70] - Outgoing [6]</div>
                                             <br/>
-                                            <div>Входящий [55] - Исходящий [7]</div>
+                                            <div>Incoming [71] - Outgoing [7]</div>
                                             <br/>
-                                            <div>Входящий [56] - Исходящий [8]</div>
+                                            <div>Incoming [72] - Outgoing [8]</div>
                                             <br/>
-                                            <div>Входящий [57] - Исходящий [9]</div>
+                                            <div>Incoming [73] - Outgoing [9]</div>
                                             <br/>
-                                            <div>Входящий [58] - Исходящий [10]</div>
+                                            <div>Incoming [74] - Outgoing [10]</div>
                                             <br/>
-                                            <div>Входящий [59] - Исходящий [11]</div>
+                                            <div>Incoming [75] - Outgoing [11]</div>
                                             <br/>
-                                            <div>Входящий [60] - Исходящий [12]</div>
+                                            <div>Incoming [76] - Outgoing [12]</div>
                                             <br/>
-                                            <div>Входящий [61] - Исходящий [13]</div>
+                                            <div>Incoming [77] - Outgoing [13]</div>
                                             <br/>
-                                            <div>Входящий [62] - Исходящий [14]</div>
+                                            <div>Incoming [78] - Outgoing [14]</div>
                                             <br/>
-                                            <div>Входящий [63] - Исходящий [15]</div>
+                                            <div>Incoming [79] - Outgoing [15]</div>
                                             <br/>
-                                            <div>Входящий [64] - Исходящий [16]</div>
+                                            <div>Incoming [80] - Outgoing [16]</div>
                                             <br/>
 
                                     </div>
                             </details>
+
                     </div>
             </details>
 
