@@ -262,7 +262,10 @@ sidebar_position: 2
                                             <br/>
 
                                     </div>
-                                    <details>
+                            </details>
+
+                            <details>
+
                                 <summary>
                                     Azimuth Of the Target [33-48] - [1-16]
                                 </summary>
