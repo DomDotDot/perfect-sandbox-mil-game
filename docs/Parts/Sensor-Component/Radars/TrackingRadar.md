@@ -1,3 +1,8 @@
+---
+title: Tracking Radar
+sidebar_position: 2
+---
+
 # Tracking Radar
 
 ## Description
